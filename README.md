@@ -1,25 +1,16 @@
 Spectre Client
 ================
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+## Setup
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
-
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
-
-Problems? Issues?
------------
-
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
-
-Ruby on Rails
--------------
+1. Install PostgreSQL
+2. Create a user with superuser role
+3. `createdb spectre-client_development`
+4. Clone the repo
+5. `cd spectre-client`
+6. `bundle install`
+7. Rename `dotenv` file to `.env` and set up enviroment variables
+8. `rails server`
 
 This application requires:
 
@@ -28,23 +19,3 @@ This application requires:
 
 Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
-Getting Started
----------------
-
-Documentation and Support
--------------------------
-
-Issues
--------------
-
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
