@@ -1,2 +1,6 @@
 DB_USERNAME=your_db_username
 DB_PASSWORD=your_db_password
+
+APP_ID=app_id
+SECRET=secret_to_be_used
+PRIVATE_PEM_PATH=path_to_private_key

@@ -11,10 +11,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    build_resource(sign_up_params)
-    puts(resource.name)
+    # build_resource(sign_up_params)
+    # puts(resource.name)
 
-    # super
+    super
   end
 
   # GET /resource/edit
