@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../services/api/client' # TODO: find a better way to import
+
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -11,8 +13,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    # build_resource(sign_up_params)
-    # puts(resource.name)
+    build_resource(sign_up_params)
+
+    response = SaltedgeAPI.new.customers.post(
+      'data' => { 'identifier' => resource.email }
+    )
+
+    res_json = to_json(response)
+    resource.secret = res_json['data']['secret']
 
     super
   end
@@ -30,6 +38,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # DELETE /resource
   def destroy
     super
+  end
+
+  def to_json(json_string)
+    JSON.parse(json_string)
   end
 
   # GET /resource/cancel

@@ -31,7 +31,7 @@ class Saltedge
     RestClient::Request.execute(
       method:  hash[:method],
       url:     hash[:url],
-      payload: hash[:params].chomp(),
+      payload: hash[:params],
       log:     Logger.new(STDOUT),
       headers: {
         'Accept'       => 'application/json',

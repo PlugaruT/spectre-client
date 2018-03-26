@@ -26,13 +26,16 @@ class APIBuilder
   end
 
   # final methods
-  def get
-    puts(build_url)
-    @http_client.request(:get, build_url)
+  def get(params = {})
+    @http_client.request(:get, build_url, params)
   end
 
   def post(params = {})
     @http_client.request(:post, build_url, params)
+  end
+
+  def put(params = {})
+    @http_client.request(:put, build_url, params)
   end
 
   private

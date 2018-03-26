@@ -4,11 +4,17 @@ require_relative './builder'
 
 # Class for interacting with Spectre API
 class SaltedgeAPI
+  @url = 'https://www.saltedge.com/api/v4'
+
   def customers
-    api.child('customers')
+    api_url.child('customers')
   end
 
-  def api
-    APIBuilder.new('https://www.saltedge.com/api/v4')
+  def logins
+    api_url.child('logins')
+  end
+
+  def api_url
+    APIBuilder.new(@url)
   end
 end
