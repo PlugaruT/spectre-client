@@ -2,7 +2,7 @@
 
 require_relative './builder'
 
-# Class for interacting with Spectre API
+# Class for interacting with Saltedge API
 class SaltedgeAPI
 
   def customers

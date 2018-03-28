@@ -15,33 +15,45 @@ class Saltedge
   end
 
   def initialize(app_id = nil, secret = nil, private_pem_path = nil)
-    @app_id      = app_id || ENV['APP_ID']
-    @secret      = secret || ENV['SECRET']
+    @app_id = app_id || ENV['APP_ID']
+    @secret = secret || ENV['SECRET']
     private_pem_path ||= ENV['PRIVATE_PEM_PATH']
     @private_key = OpenSSL::PKey::RSA.new(File.open(private_pem_path))
   end
 
+  def get(url, params = {})
+    request(:get, url, params)
+  end
+
+  def post(url, params = {})
+    request(:post, url, params)
+  end
+
+  def put(url, params = {})
+    request(:put, url, params)
+  end
+
   def request(method, url, params = {})
     hash = {
-      method:     method,
-      url:        url,
-      expires_at: (Time.now + EXPIRATION_TIME).to_i,
-      params:     as_json(params)
+        method: method,
+        url: url,
+        expires_at: (Time.now + EXPIRATION_TIME).to_i,
+        params: as_json(params)
     }
 
     RestClient::Request.execute(
-      method:  hash[:method],
-      url:     hash[:url],
-      payload: hash[:params],
-      log:     Logger.new(STDOUT),
-      headers: {
-        'Accept'       => 'application/json',
-        'Content-type' => 'application/json',
-        'Expires-at'   => hash[:expires_at],
-        'Signature'    => sign_request(hash),
-        'App-Id'       => app_id,
-        'Secret'       => secret
-      }
+        method: hash[:method],
+        url: hash[:url],
+        payload: hash[:params],
+        log: Logger.new(STDOUT),
+        headers: {
+            'Accept' => 'application/json',
+            'Content-type' => 'application/json',
+            'Expires-at' => hash[:expires_at],
+            'Signature' => sign_request(hash),
+            'App-Id' => app_id,
+            'Secret' => secret
+        }
     )
   rescue RestClient::Exception => error
     pp JSON.parse(error.response)
@@ -53,7 +65,7 @@ class Saltedge
     data = "#{hash[:expires_at]}|#{hash[:method].to_s.upcase}|#{hash[:url]}|#{hash[:params]}"
     pp data
     Base64.encode64(private_key.sign(OpenSSL::Digest::SHA256.new, data))
-          .delete("\n")
+        .delete("\n")
   end
 
   def as_json(params)
