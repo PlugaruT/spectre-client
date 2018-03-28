@@ -1,10 +1,11 @@
-require 'json'
-require 'base64'
-require 'openssl'
-require 'digest'
-require 'rest-client'
+# frozen_string_literal: true
 
-# HTTP client
+require "json"
+require "base64"
+require "openssl"
+require "rest-client"
+
+# HTTP client that handles request and header signing
 class Saltedge
   attr_reader :app_id, :secret, :private_key
   EXPIRATION_TIME = 60
@@ -51,7 +52,8 @@ class Saltedge
   def sign_request(hash)
     data = "#{hash[:expires_at]}|#{hash[:method].to_s.upcase}|#{hash[:url]}|#{hash[:params]}"
     pp data
-    Base64.encode64(private_key.sign(OpenSSL::Digest::SHA256.new, data)).delete("\n")
+    Base64.encode64(private_key.sign(OpenSSL::Digest::SHA256.new, data))
+          .delete("\n")
   end
 
   def as_json(params)

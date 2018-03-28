@@ -13,7 +13,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'json'
 gem 'openssl'
-gem 'digest'
 gem 'rest-client'
 group :development, :test do
   gem 'dotenv-rails'
