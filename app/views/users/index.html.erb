@@ -3,12 +3,25 @@
     <h3>Users</h3>
     <div class="column">
       <table class="table">
+        <thead>
+        <tr>
+          <th class="text-center">Name</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Actions</th>
+        </tr>
+        </thead>
         <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <%= render user %>
-            </tr>
-          <% end %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+              <button class="btn btn-primary btn-xs">
+                Logins
+              </button>
+            </td>
+          </tr>
+        <% end %>
         </tbody>
       </table>
     </div>

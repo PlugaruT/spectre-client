@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    puts(params)
     @user = User.find(params[:id])
     redirect_to root_path, alert: 'Access denied.' unless @user == current_user
   end
